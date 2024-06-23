@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Cookies from 'js-cookie';
+import { Link } from 'react-router-dom';
 import { login } from '../api';
 
 export default function Login() {
@@ -34,6 +35,7 @@ export default function Login() {
             />
             <button onClick={handleLogin}>Login</button>
             {error && <p className="error">{error}</p>}
+            <p>Don't have an account? <Link to="/signup">Signup here</Link></p>
         </div>
     );
 }

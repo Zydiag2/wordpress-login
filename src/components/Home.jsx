@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Cookies from 'js-cookie';
 import { getUserInfo } from '../api';
+import { useNavigate } from 'react-router-dom';
 
 export default function Home() {
     const [user, setUser] = useState(null);
@@ -24,6 +25,11 @@ export default function Home() {
 
         fetchUser();
     }, []);
+    const navigate = useNavigate()
+    const handleLogout = () => {
+        Cookies.remove('token');
+        navigate('/login')
+      };
 
     if (!user) {
         return <div className="container">Loading...</div>;
@@ -33,6 +39,7 @@ export default function Home() {
         <div className="container">
             <h1>Welcome, {user.username}!</h1>
             <p>Email: {user.email}</p>
+            <button onClick={handleLogout}>Logout</button>
         </div>
     );
 }
